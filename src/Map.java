@@ -10,36 +10,36 @@ public class Map {
         return current;
     }
 
+
+
     // *** Constructor ***//
     public Map() {
         buildUniverse();
     }
 
     public void buildUniverse() {
-        Room room1 = new Room("Room 1", "Description of room 1");
-        Room room2 = new Room("Room 2", "Description of room 2");
-        Room room3 = new Room("Room 3", "Description of room 3");
-        Room room4 = new Room("Room 4", "Description of room 4");
+        Room room1 = new Room("at the forest entrance", "Do you want to continue into the forest?");
+        Room room2 = new Room("on a mysterious path", "You might find a directory tool");
+        Room room3 = new Room("in an open forest area", "It's cold and windy");
+        Room room4 = new Room("at a sticky cold bog", "Be careful not to get stuck");
         Room room5 = new Room("Room 5", "Description of room 5");
-        Room room6 = new Room("Room 6", "Description of room 6");
-        Room room7 = new Room("Room 7", "Description of room 7");
-        Room room8 = new Room("Room 8", "Description of room 8");
-        Room room9 = new Room("Room 9", "Description of room 9");
+        Room room6 = new Room("at a creepy small cottage", "Do not get seen, but consider looking at their belongings ...");
+        Room room7 = new Room("at a lake", "Smart players would look for food");
+        Room room8 = new Room("down in a big hole", "look for tools to get out");// make a lock, you can only exit room 8 with ladder?
+        Room room9 = new Room("at a slightly lit bonfire", "Someone was here ... ");
 
-        room1.addItems("item1", "item1Desc");
-        room1.addItems("item1", "item1Desc");
-        room2.addItems("item2", "item2Desc");
+        room1.addItems("Mushrooms", "Family of edible mushrooms");
+        room1.addItems("Blanket", "Wool blanket");
+        room2.addItems("compass", "Good use if you want out");
         //no items in room 3
-        room4.addItems("item4", "item4Desc");
+        room4.addItems("Stick", "Use this stick to not get stuck");
         room5.addItems("item5", "item5Desc");
-        room6.addItems("item6", "item6Desc");
-        room6.addItems("item6", "item6Desc");
-        room7.addItems("item7", "item7Desc");
-        room7.addItems("item7", "item7Desc");
-        room7.addItems("item7", "item7Desc");
-        room8.addItems("item8", "item8Desc");
-        room9.addItems("item9", "item1Desc");
-        room9.addItems("item9", "item1Desc");
+        room6.addItems("Apple pie", "Be careful, who baked this pie?");
+        room6.addItems("Water tank", "Find a cup to collect water");
+        room7.addItems("Salmon", "It's already dead, \nare you hungry? take a chance ...");
+        room7.addItems("Long stick and line", "With this you can fish a some fresh food");
+        room8.addItems("Ladder", "You want to get out, right?");
+        room9.addItems("Dry wood", "To make fire");
 
 
         room1.setNeighbour(null, room2, null, room4);

@@ -7,6 +7,7 @@ public class Room {
     private final String description;
     private ArrayList<Item> itemArrayList = new ArrayList<>();
 
+
     private Room north;
     private Room east;
     private Room west;
@@ -17,7 +18,9 @@ public class Room {
     public Room(String name, String description) {
         this.name = name;
         this.description = description;
+
     }
+
 
     //*** METHODS ***//
     public void setNeighbour(Room north, Room east, Room west, Room south) {
@@ -51,9 +54,10 @@ public class Room {
         return south;
     }
 
-    public void addItems(String itemName, String itemDescription){
+    public void addItems(String itemName, String itemDescription) {
         itemArrayList.add(new Item(itemName, itemDescription));// new item object refers ti Item class
     }
+
 
     public ArrayList<Item> getItemArrayList() {
         return itemArrayList;
@@ -61,20 +65,8 @@ public class Room {
 
     @Override
     public String toString() {
-        return "You are currently in " + name + ".";
+        return "You are currently in " + name + ". " + description + ". Here you can find" + itemArrayList;
     }
-
-    // TILFØJ EN LISTE TIL ITEMS I ROOM KLASSEN
-//    Item bigMushroom = new Item ("Mushroom", "Big and edible");
-//    Item stick = new Item("Stick", "Magical");
-//    Item tre = new Item ("tre", "Item tre");
-//    Item fire = new Item ("fire", "Item fire");
-//    Item fem = new Item ("fem", "Item fem");
-//    Item seks = new Item ("seks", "Item seks");
-//    Item syv = new Item ("syv", "Item syv");
-//    Item otte = new Item ("otte", "Item otte");
-//    Item ni = new Item ("ni", "Item ni");
-
 
 }
 
