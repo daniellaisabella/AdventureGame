@@ -7,3 +7,7 @@ public class Main {
     }
 
 }
+
+//rum med ladder kalder look for tools to get out, selvom man har take ladder. Lav det
+
+//

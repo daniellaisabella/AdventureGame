@@ -10,36 +10,54 @@ public class Map {
         return current;
     }
 
+
     // *** Constructor ***//
     public Map() {
         buildUniverse();
     }
 
     public void buildUniverse() {
-        Room room1 = new Room("Room 1", "Description of room 1");
-        Room room2 = new Room("Room 2", "Description of room 2");
-        Room room3 = new Room("Room 3", "Description of room 3");
-        Room room4 = new Room("Room 4", "Description of room 4");
+        Room room1 = new Room("at the forest entrance", "Do you want to continue into the forest?");
+        Room room2 = new Room("on a mysterious path", "Go back or continue?");
+        Room room3 = new Room("in an open forest area", "It's cold and windy");
+        Room room4 = new Room("at a sticky cold bog", "Be careful not to get stuck");
         Room room5 = new Room("Room 5", "Description of room 5");
-        Room room6 = new Room("Room 6", "Description of room 6");
-        Room room7 = new Room("Room 7", "Description of room 7");
-        Room room8 = new Room("Room 8", "Description of room 8");
-        Room room9 = new Room("Room 9", "Description of room 9");
+        Room room6 = new Room("at a creepy small cottage", "Do not get seen, but consider looking at their belongings ...");
+        Room room7 = new Room("at a lake", "Smart players would look for food");
+        Room room8 = new Room("down in a big hole", "look for tools to get out");// make a lock, you can only exit room 8 with ladder?
+        Room room9 = new Room("at a slightly lit bonfire", "Someone was here ... ");
 
-        room1.addItems("item1", "item1Desc");
-        room1.addItems("item1", "item1Desc");
-        room2.addItems("item2", "item2Desc");
+        Food mushrooms = new Food("mushrooms", "Family of edible mushrooms", 80);
+        room1.addItems(mushrooms);
+
+        Item blanket = new Item("blanket", "Wool blanket");
+        room1.addItems(blanket);
+
+        Item compass = new Item("compass", "Good use if you want out");
+        room2.addItems(compass);
+
         //no items in room 3
-        room4.addItems("item4", "item4Desc");
-        room5.addItems("item5", "item5Desc");
-        room6.addItems("item6", "item6Desc");
-        room6.addItems("item6", "item6Desc");
-        room7.addItems("item7", "item7Desc");
-        room7.addItems("item7", "item7Desc");
-        room7.addItems("item7", "item7Desc");
-        room8.addItems("item8", "item8Desc");
-        room9.addItems("item9", "item1Desc");
-        room9.addItems("item9", "item1Desc");
+        Item stick = new Item("stick", "Use stick to not get stuck");
+        room4.addItems(stick);
+
+        Item item5 = new Item("item5", "Item5 Decsriptoi");
+        room5.addItems(item5);
+
+        Food applePie = new Food("apple pie", "Be careful, who baked this pie?",-30);
+        room6.addItems(applePie);
+
+        Food waterTank = new Food("trash", "You must be hungry ... ",-40);
+        room6.addItems(waterTank);
+
+        Food salmon = new Food("salmon", "It's already dead, \nare you hungry? take a chance ...",-60);
+        room7.addItems(salmon);
+
+        Item stickLine = new Item("long stick and line", "With this you can fish a some fresh food");
+        room7.addItems(stickLine);
+
+        Item ladder = new Item("ladder", "You want to get out, right?");
+        room8.addItems(ladder);
+        //no items in room 9
 
 
         room1.setNeighbour(null, room2, null, room4);
