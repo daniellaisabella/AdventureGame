@@ -49,6 +49,9 @@ public class Map {
         Food waterTank = new Food("trash", "You must be hungry ... ",-40);
         room6.addItems(waterTank);
 
+        RangedWeapon rifle = new RangedWeapon("rifle" ,"lightweight riffle", 5);
+        room6.addItems(rifle);
+
         Food salmon = new Food("salmon", "It's already dead, \nare you hungry? take a chance ...",-60);
         room7.addItems(salmon);
 
@@ -57,7 +60,10 @@ public class Map {
 
         Item ladder = new Item("ladder", "You want to get out, right?");
         room8.addItems(ladder);
-        //no items in room 9
+
+        MeleeWeapon machete = new MeleeWeapon ("machete","Good for getting through the forest, or defending yourself ...");
+        room9.addItems(machete);
+
 
 
         room1.setNeighbour(null, room2, null, room4);

@@ -89,14 +89,25 @@ public class UI {
                         System.out.println(dropResult); // Print the result
                         break;
 
-                    case "eat":
+                    case "Eat", "eat":
                         System.out.println("What food do you want to eat?");
                         String eatItemName = input.nextLine().trim();
                         String eatResult = adventure.getPlayer().eatItem(eatItemName);
                         System.out.println(eatResult);
+                        break;
+                    case "Equip", "equip":
+                        System.out.println("What weapon would you like to equip?");
+                        String equipWeaponName = input.nextLine().trim();
+                        String equipResult = adventure.getPlayer().equipWeapon(equipWeaponName);
+                        System.out.println(equipResult);
+
+                        break;
+                    case "ATTACK", "Attack", "attack":
+                        // for now there is no enemy involved in game del 4
+                        System.out.println(adventure.getPlayer().attack() );;
+                        break;
                     case "health":
                         System.out.println("Health: " + adventure.getPlayer().getHealth());
-//                        System.out.println("Health: " + adventure.getPlayer().seeHealth());
                         break;
                     case "help":
                         System.out.println("Choose your direction or look around ... ");
@@ -104,7 +115,7 @@ public class UI {
                     default:
                         System.out.println("unknown command");//if input doesn't match the options
                 }
-                if (!command.equalsIgnoreCase("search") && !command.equalsIgnoreCase("look")) {
+                if (!command.equalsIgnoreCase("search") && !command.equalsIgnoreCase("look") && !command.equalsIgnoreCase("take") && !command.equalsIgnoreCase("drop") && !command.equalsIgnoreCase("eat") && !command.equalsIgnoreCase("equip") && !command.equalsIgnoreCase("attack") && !command.equalsIgnoreCase("health")) {
                     System.out.println("You are " + adventure.getPlayer().getCurrentRoom().getName());//When player has moved, the position is printed
                     System.out.println(adventure.getPlayer().getCurrentRoom().getDescription());
 

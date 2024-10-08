@@ -8,6 +8,7 @@ public class Main {
 
 }
 
-//rum med ladder kalder look for tools to get out, selvom man har take ladder. Lav det
+//rum med ladder kalder look for tools to get out, selvom man har take ladder. Lav det (ekstra opg. del 1)
+//e
+// rum med long stick and line - brug til at få en fisk
 
-//

@@ -6,9 +6,8 @@ public class Player {
 
     // *** Instance variables *** //
     private Room current;//This variable keeps track of the current room where the player is located
-    private int health;
-
     private ArrayList<Item> inventory;
+    private int health;
 
     // *** Constructor *** //
     public Player(Room currentRoom) {
@@ -26,6 +25,7 @@ public class Player {
     public int getHealth() {
         return this.health;
     }
+
 
     // *** USER OPTION METHODS ***//
     public void moveToRoomNorth() {
@@ -68,7 +68,7 @@ public class Player {
     public String checkInventory() {
         String current = "";
         for (Item item : inventory) {
-            current += item.toString() + ".\n";
+            current += "- " + item.toString() + ".\n";
         }
         return current;
 
@@ -112,81 +112,100 @@ public class Player {
             return "You don't posses the item you wish to drop";
         }
 
-
     }
 
-
+    // *** DEL 3  *** // - FOOD
 
     public String eatItem(String itemName) {
         Food itemEat = null;
 
-            // Check in the inventory for the Food
-            for (Item item : inventory) {
+        // Check in the inventory for the Food
+        for (Item item : inventory) {
+            if (item.getItemName().equalsIgnoreCase(itemName)) {
+                if (item instanceof Food) {
+                    itemEat = (Food) item; // Assign the food item, type cast food
+                    break;
+                } else {
+                    return "You cannot eat the " + item.getItemName() + ". It is not food.";
+                }
+            }
+        }
+
+        // Check in the current room for the Food
+        if (itemEat == null) { // Only check if itemEat is still null
+            for (Item item : current.getItemArrayList()) {
                 if (item.getItemName().equalsIgnoreCase(itemName)) {
                     if (item instanceof Food) {
-                        itemEat = (Food) item; // Assign the food item, type cast food
+                        itemEat = (Food) item; // Assign the food item
                         break;
                     } else {
                         return "You cannot eat the " + item.getItemName() + ". It is not food.";
                     }
                 }
             }
+        }
 
-            // Check in the current room for the Food
-            if (itemEat == null) { // Only check if itemEat is still null
-                for (Item item : current.getItemArrayList()) {
-                    if (item.getItemName().equalsIgnoreCase(itemName)) {
-                        if (item instanceof Food) {
-                            itemEat = (Food) item; // Assign the food item
-                            break;
-                        } else {
-                            return "You cannot eat the " + item.getItemName() + ". It is not food.";
-                        }
-                    }
+        // Now check if we found a food item
+        if (itemEat != null) {
+            // Update health
+            health += itemEat.getHealthGain();
+            // Remove the item from inventory or current area
+            inventory.remove(itemEat);
+            current.getItemArrayList().remove(itemEat);
+            return "You are now eating the " + itemEat.getItemName() + ". Health gained: " + itemEat.getHealthGain();
+        } else {
+            return "The food you wish to eat is not in your inventory or in the forest area...";
+        }
+    }
+
+    // *** Del 4 *** // - WEAPON
+
+    private Weapon equippedWeapon; // holds a reference to the currently equipped weapon for the player.
+
+    public Weapon getEquippedWeapon(){
+        return equippedWeapon; // reeturns currentlu equipped weapon
+    }
+    //This method of type String (having string parameter, returning a String if weapon is equipped or not),
+    // let the player equip weapon from inv based on weaponName
+    public String equipWeapon(String weaponName) {
+        //initializing a weapon object itemEquip to null
+        Weapon itemEquip = null; // holds the reference to the weapon found in inv, if existing
+
+        // with for loop, checking for weapon - iterates over players inv
+        for (Item item : inventory) {
+            if (item.getItemName().trim().equalsIgnoreCase(weaponName.trim())) {//comparing item in the inv to weapon player want to equip
+                if (item instanceof Weapon) {//check if item is of weapon class
+                    itemEquip = (Weapon) item; // cast item to Weapon type and stores in itemEquip variable, player can now equip the weapon
+                    break; //exit loop if the weapon is found
+                } else {
+                    return "It's not a weapon";
                 }
-            }
-
-            // Now check if we found a food item
-            if (itemEat != null) {
-                // Update health
-                health += itemEat.getHealthGain();
-                // Remove the item from inventory or current area
-                inventory.remove(itemEat);
-                current.getItemArrayList().remove(itemEat);
-                return "You are now eating the " + itemEat.getItemName() + ". Health gained: " + itemEat.getHealthGain();
-            } else {
-                return "The food you wish to eat is not in your inventory or in the forest area...";
             }
         }
 
-//        for (Item item : inventory ) {
-//            if(item.getItemName().equalsIgnoreCase(itemName)){// Checking in inventory for the Food
-//            if (item instanceof Food) {
-//                itemEat= (Food) item; //Assign food item
-//                health += ((Food) itemEat).getHealthGain(); //Update health
-//                inventory.remove(itemEat);//Remove from inventory list
-//            }
-//                return "You are now eating the " + item.getItemName() + " from your inventory list" + "\nHealth gained: " + ((Food) itemEat).getHealthGain();
-//            } else {
-//                return " You cannot eat the " + item.getItemName();
-//            }
-//        }
-//        for (Item item : current.getItemArrayList()) { // Checking in current room for the Food
-//            if (item.getItemName().equalsIgnoreCase(itemName)) {
-//                if (item instanceof Food) {
-//                    itemEat= (Food) item; //Assign food item
-//                    health += ((Food) itemEat).getHealthGain(); //Update health
-//                    current.getItemArrayList().remove(itemEat);
-//                    return "You are now eating the " + item.getItemName() +  "\nHealth gained: " + ((Food) itemEat).getHealthGain();
-//                } else {
-//                    return " You cannot eat the " + item.getItemName();
-//                }
-//            }
-//        }
-//
-//        return "The food you wish to eat is not in your inventory or in the forest area ...";
-//    }
+        if (itemEquip != null) { //if weapon is found
+            //Equip the weapon
+            itemEquip.equip();// call equip() method on itemEquip weapon object
+            this.equippedWeapon = itemEquip; // Assign the equipped weapon to the player
+            return "Equipping " + itemEquip.getItemName();
+        } else {
+            return "The weapon you wish to equip is not in your inventory ...";
+        }
 
+    }
+
+
+    public String attack() {
+        if (equippedWeapon != null && equippedWeapon.isEquipped()) {
+            String attackResult = equippedWeapon.attack(); // Call the attack method
+            return attackResult; // Return the result message
+        } else {
+            return "You must equip a weapon before attacking!"; // Message if no weapon is equipped
+        }
+    }
 }
+
+
+
 
 
