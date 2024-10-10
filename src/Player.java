@@ -214,10 +214,6 @@ public class Player {
 
     // *** Del 4 *** // - WEAPON
 
-//    public Weapon getEquippedWeapon() {
-//        return equippedWeapon; // reeturns currentlu equipped weapon
-//    }
-
     public String equipWeapon(String weaponName) {
         //initializing a weapon object itemEquip to null
         Weapon itemEquip = null; // holds the reference to the weapon found in inv, if existing
@@ -246,10 +242,12 @@ public class Player {
     }
 
     // *** ATTACK METHOD *** //
+    // This method handles the logic for attacking when there are no enemies in room
     private String attackEmptySpace() {
         return "No one is here to attack. You attack nothing ...";
     }
 
+    // This method handles the logic for attacking a specified enemy.
     private String performAttack(Enemy enemy) {
         // Check if the enemy is alive before attacking
         if (!enemy.isAlive()) {
@@ -272,6 +270,7 @@ public class Player {
         return "You attacked " + enemy.getEnemyName() + " and damaged " + damageDealt;
     }
 
+    // The primary method for handling attacks. It allows the player to specify an enemy by name or attacks the nearest enemy if no name is provided.
     public String attack(String enemyName) {
         if (!isAlive) {
             return "You are dead. GAME OVER";
@@ -282,10 +281,8 @@ public class Player {
             return "Equip weapon first";
         }
 
-        // Check if weapon can be used (has ammo, etc.)
-        String weaponAttackMessage = equippedWeapon.attack(); // Call the attack method on the equipped weapon
-
-        // Check if the weapon is out of ammo
+        // Check if weapon has ammo
+        String weaponAttackMessage = equippedWeapon.attack(); // Call the attack method on the equipped weapon. Because the attack methods in Weapon(Ranged&Melee) holds logic for counting ammo
         if (weaponAttackMessage.equals("Out of ammo!")) {
             return weaponAttackMessage; // Return out of ammo message
         }
@@ -295,18 +292,18 @@ public class Player {
         if (enemyName == null || enemyName.isEmpty()) {
             // check if there are enemies in the forest area
             if (!current.getEnemyArrayList().isEmpty()) {
-                currentEnemy = current.getEnemyArrayList().get(0); //The first enemy on place 0 is the nearest
+                currentEnemy = current.getEnemyArrayList().get(0); //The first enemy on place 0 on ArrayList is the nearest, and we call it currentEnemy
                 String result = performAttack(currentEnemy);
                 // if the enemy is still alive, it attacks back
                 if(currentEnemy.isAlive()){
-                    return weaponAttackMessage + "\n" + result + "\n" + currentEnemy.attackPlayer(this);
+                    return weaponAttackMessage + "\n" + result + "\n" + currentEnemy.attackPlayer(this); // Calls method from Enemy, to attack and damage the player
                 }
                 return weaponAttackMessage + "\n" +  result; //return attack result if enemy is defeated
             } else {
                 return attackEmptySpace();
             }
         }
-        // find enemy by name
+        // Find enemy if name is provided
         currentEnemy = findEnemy(enemyName);
         if (currentEnemy != null) {
             String result = performAttack(currentEnemy);

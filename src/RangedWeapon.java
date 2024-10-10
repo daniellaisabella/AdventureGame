@@ -20,7 +20,7 @@ public class RangedWeapon extends Weapon {
     public String attack() {
         if (ammo > 0) {
             ammo--; //use 1 ammo per shot, decrease count by 1
-            return "shooting with " + getItemName() + ". Ammo left: " + ammo;
+            return "Shooting with " + getItemName() + " | Ammo left: " + ammo;
         } else {
             return "Out of ammo!";
         }

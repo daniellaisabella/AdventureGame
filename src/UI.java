@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UI {
-    // Method for menu display
+    // Method for menu display - not necessary, could just make sout
     public void displayMenu() {
         System.out.println();
         System.out.println("Welcome to the forest ... ");
@@ -11,14 +11,14 @@ public class UI {
         System.out.println();
     }
 
-    // start Method: reading user commands and passing them to the Adventure class.
+    // *** START Method *** // - reading user commands and passing them to the Adventure class.
     public void start() {
 
-        Scanner input = new Scanner(System.in);
-        Adventure adventure = new Adventure();//This is the ref to integrate with Adventure class
+        Scanner input = new Scanner(System.in); //This is the user scanner
+        Adventure adventure = new Adventure(); //This is the ref to integrate with Adventure class
 
-        boolean runGame = true;
-        displayMenu(); // Consider not to make it a method? - just make a sout.whatever for now:)
+        boolean runGame = true; // for looping or exit the game
+        displayMenu(); // Consider not to make it a method? - just make a sout. whatever for now:)
 
         //While loop for menu and switch method for player options in game
         while (runGame) {
@@ -85,8 +85,8 @@ public class UI {
                     case "take":
                         System.out.println("Which item do you wish to collect?");
                         String takeItemName = input.nextLine().trim();
-                        String takeResult = adventure.getPlayer().takeItem(takeItemName);
-                        System.out.println(takeResult);
+                        String takeResult = adventure.getPlayer().takeItem(takeItemName); // Call takeItem method from Player
+                        System.out.println(takeResult);// Print the result
                         break;
                     case "drop":
                         System.out.println("Which item do you want to drop?");
@@ -98,20 +98,18 @@ public class UI {
                     case "eat":
                         System.out.println("What food do you want to eat?");
                         String eatItemName = input.nextLine().trim();
-                        String eatResult = adventure.getPlayer().eatItem(eatItemName);
-                        System.out.println(eatResult);
+                        String eatResult = adventure.getPlayer().eatItem(eatItemName); // Call eatItem method from Player
+                        System.out.println(eatResult); // Ptint result
                         break;
                     case "equip":
                         System.out.println("What weapon would you like to equip?");
                         String equipWeaponName = input.nextLine().trim();
                         String equipResult = adventure.getPlayer().equipWeapon(equipWeaponName);
                         System.out.println(equipResult);
-//                        System.out.println( adventure.getPlayer().equipWeapon(equipWeaponName)); ?? prøv
-
                         break;
                     case "attack":
                         System.out.println("Who do you want to attack? (Press ENTER to attack the nearest enemy)");
-                        String enemyName = input.nextLine().trim(); // Prompt for enemy name after entering "attack
+                        String enemyName = input.nextLine().trim(); // Prompt for enemy name after entering "attack"
                         if (!enemyName.isEmpty()) {
                             // Attack the specified enemy
                             System.out.println(adventure.getPlayer().attack(enemyName));

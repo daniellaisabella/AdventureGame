@@ -46,18 +46,14 @@ public class Enemy {
     public Weapon takeDamage(int damage, Room currentRoom) {
         healthLevel -= damage; // subtracting damage from health level
 
-        if (healthLevel < 0) {
+        if (healthLevel <= 0) {
             healthLevel = 0;// Prevent negative health
             isAlive = false; // false when health is <=0 enemy is dead
-
-            System.out.println("(DEBUG)Enemy " + enemyName + " has been defeated."); // Debug message
 
             //drop weapon
             if(weapon!=null){
                 Weapon droppedWeapon = weapon; //store weapon to return the weapon
                 weapon = null; //remove weapon from enemy
-
-                System.out.println("(DEBUG)" + enemyName + " dropped their weapon: " + droppedWeapon.getItemName()); // Debug message
                 currentRoom.addItems(droppedWeapon);
                 return droppedWeapon;
             }
@@ -71,7 +67,7 @@ public class Enemy {
         if (player.isAlive()) {
             int damage = weapon.getDamage();
             player.playerDamage(damage);
-            return enemyName + " attacks you for " + damage + "damage";
+            return enemyName + " attacks you for " + damage + " damage";
         } else {
             return "The player is already defeated";
         }

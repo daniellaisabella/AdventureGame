@@ -19,10 +19,10 @@ public class Map {
         Room room2 = new Room("on a mysterious path", "Go back or continue?");
         Room room3 = new Room("in an open forest area", "It's cold and windy");
         Room room4 = new Room("at a sticky cold bog", "Be careful not to get stuck");
-        Room room5 = new Room("in a cold wet cave", "There is one entrance, and one way out ...");
+        Room room5 = new Room("a cold wet cave", "There is one entrance, and one way out ...");
         Room room6 = new Room("at a creepy small cottage", "Do not get seen, but consider looking at their belongings ...");
         Room room7 = new Room("at a lake", "Smart players would look for food");
-        Room room8 = new Room("down in a big hole", "look for tools to get out");// make a lock, you can only exit room 8 with ladder?//Extra del 1
+        Room room8 = new Room("a big hole", "look for tools to get out");// make a lock, you can only exit room 8 with ladder?//Extra del 1
         Room room9 = new Room("at a slightly lit bonfire", "Someone was here ... ");
 
         Food mushrooms = new Food("mushrooms", "Family of edible mushrooms", 80);
@@ -38,15 +38,15 @@ public class Map {
         Item stick = new Item("stick", "Use stick to not get stuck");
         room4.addItems(stick);
 
-        RangedWeapon pistol = new RangedWeapon("pistol", "bullet will hit you hard",120, 30);
+        RangedWeapon pistol = new RangedWeapon("pistol", "bullet will hit you hard",1,30);
         Enemy rat = new Enemy("Rat", "Stinky talking rat", 15, pistol);
         room4.addEnemy(rat);
 
         Food magicMoss = new Food("Magic moss", "The most nutritous eating found in the forest", 70);
         room5.addItems(magicMoss);
 
-        MeleeWeapon mudThrow = new MeleeWeapon("Mud", "stinky mud will make you suffer", 1); // MeleeWeapon for enemy
-        Enemy troll = new Enemy("Forest Troll", "Throwing mud", 5, mudThrow); // new enemy
+        MeleeWeapon mudSlingshot = new MeleeWeapon("mud slingshot", "stinky mud will make you suffer", 1); // MeleeWeapon for enemy
+        Enemy troll = new Enemy("Forest Troll", "Throwing mud", 5, mudSlingshot); // new enemy
         room5.addEnemy(troll); // add enemy to room 5
 
         RangedWeapon mudPistol = new RangedWeapon("Mud pistol", "mud will hit you hard",1, 5);
