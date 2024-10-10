@@ -3,9 +3,10 @@ import java.util.ArrayList;
 public class Room {
 
     //*** ATTRIBUTES ***//
-    private final String name;
-    private final String description;
+    private String name;
+    private String description;
     private ArrayList<Item> itemArrayList = new ArrayList<>();
+    private ArrayList<Enemy> enemyArrayList = new ArrayList<>();
 
 
     private Room north;
@@ -55,24 +56,31 @@ public class Room {
     }
 
     public void addItems(Item item) {
-        itemArrayList.add(item);// new item object refers ti Item class
+        if (item != null) {
+            itemArrayList.add(item);// new item object refers ti Item class
+        }
     }
-//    public void addItems(String itemName, String itemDescription, String itemType) {
-//        itemArrayList.add(new Item(itemName, itemDescription, itemType));// new item object refers ti Item class
-//    }
 
 
     public ArrayList<Item> getItemArrayList() {
         return itemArrayList;
     }
 
+    // *** ADD & GET ENEMY METHODS *** //
+    public void addEnemy(Enemy enemy){
+        enemyArrayList.add(enemy);
+    }
+    // Method to remove an enemy from the room
+    public void removeEnemy(Enemy enemy) {
+        enemyArrayList.remove(enemy);
+    }
+
+    public ArrayList<Enemy> getEnemyArrayList() {
+        return enemyArrayList;
+    }
     @Override
     public String toString() {
         return "You are currently in " + name + ". " + description + ". Here you can find" + itemArrayList;
     }
 
 }
-
-
-//Både Room og Player skal have en ArrayList af Item-objekter, og metoder til at tilføje og fjerne items,
-// samt en metode til at få hele listen af items.
